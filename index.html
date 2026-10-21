@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Анатолий Константинов — фронтенд-разработчик</title>
+<meta name="description" content="Портфолио фронтенд-разработчика: навыки, опыт и проекты.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700&family=Manrope:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  color-scheme:dark;
+  --bg:#080a12; --surface:#0f1220; --line:#1e2338; --text:#e8eaf6; --muted:#8a90ad;
+  --violet:#8b7cff; --cyan:#35e0ff; --glow:rgba(139,124,255,.18);
+  --display:'Unbounded','Manrope',system-ui,sans-serif; --body:'Manrope',system-ui,sans-serif; --mono:'JetBrains Mono',ui-monospace,monospace;
+  box-sizing:border-box; padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+html{scroll-behavior:smooth;scroll-padding-top:calc(88px + env(safe-area-inset-top,0px))}
+*,*::before,*::after{box-sizing:inherit}
+body{margin:0;background:var(--bg);color:var(--text);font-family:var(--body);line-height:1.65;overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:rgba(8,10,18,.85);backdrop-filter:blur(14px);z-index:60}
+#spot{position:fixed;inset:0;pointer-events:none;z-index:0;background:radial-gradient(520px circle at var(--x,70%) var(--y,10%),rgba(139,124,255,.13),transparent 65%)}
+a{color:inherit;text-decoration:none}
+:focus-visible{outline:2px solid var(--cyan);outline-offset:3px;border-radius:6px}
+.wrap{width:min(1080px,100% - 40px);margin-inline:auto;position:relative;z-index:1}
+
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;background:rgba(8,10,18,.72);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+header .wrap{display:flex;align-items:center;justify-content:space-between;height:64px;gap:16px}
+.logo{font-family:var(--mono);font-weight:500;color:var(--cyan)}
+nav{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none}
+nav a{padding:8px 14px;border-radius:999px;color:var(--muted);font-size:.93rem;white-space:nowrap;transition:color .25s,background .25s,box-shadow .25s}
+nav a:hover{color:var(--text);background:rgba(139,124,255,.1)}
+nav a.on{color:#fff;background:rgba(139,124,255,.18);box-shadow:0 0 0 1px rgba(139,124,255,.5),0 0 22px var(--glow)}
+
+section{padding:96px 0 24px}
+h2{font-family:var(--display);font-weight:500;font-size:clamp(1.5rem,3.4vw,2.1rem);margin:0 0 36px;letter-spacing:-.01em}
+h2::after{content:"";display:block;width:56px;height:3px;margin-top:14px;border-radius:3px;background:linear-gradient(90deg,var(--violet),var(--cyan))}
+
+#hero{padding-top:72px;display:grid;grid-template-columns:1.05fr .95fr;gap:48px;align-items:center;min-height:calc(100vh - 64px)}
+h1{font-family:var(--display);font-weight:700;font-size:clamp(2rem,5.2vw,3.5rem);line-height:1.1;margin:0 0 22px;letter-spacing:-.02em}
+.lead{color:var(--muted);font-size:1.1rem;max-width:46ch;margin:0 0 32px}
+.btns{display:flex;gap:12px;flex-wrap:wrap}
+.btn{padding:13px 24px;border-radius:12px;font-weight:600;border:1px solid var(--line);transition:transform .25s,box-shadow .25s,border-color .25s}
+.btn.main{background:linear-gradient(120deg,var(--violet),#5f8bff);color:#0a0c18;border-color:transparent}
+.btn:hover{transform:translateY(-3px);box-shadow:0 10px 34px rgba(139,124,255,.38);border-color:var(--violet)}
+
+.code{background:var(--surface);border:1px solid var(--line);border-radius:16px;box-shadow:0 30px 80px rgba(0,0,0,.5),0 0 60px var(--glow);font-family:var(--mono);font-size:.9rem;overflow:hidden}
+.code .bar{display:flex;gap:7px;padding:13px 16px;border-bottom:1px solid var(--line)}
+.code .bar i{width:11px;height:11px;border-radius:50%;background:#2a2f4a}
+.code pre{margin:0;padding:20px 22px;line-height:1.8;white-space:pre-wrap}
+.k{color:var(--violet)}.s{color:var(--cyan)}.c{color:#5b6286}
+.caret{display:inline-block;width:8px;height:1.1em;background:var(--cyan);vertical-align:-3px;animation:blink 1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+
+.hero-in>*{opacity:0;transform:translateY(18px);animation:up .7s cubic-bezier(.2,.7,.2,1) forwards}
+.hero-in>*:nth-child(2){animation-delay:.12s}.hero-in>*:nth-child(3){animation-delay:.24s}
+.code{opacity:0;animation:up .8s .35s cubic-bezier(.2,.7,.2,1) forwards}
+@keyframes up{to{opacity:1;transform:none}}
+
+.about{display:grid;grid-template-columns:1.3fr 1fr;gap:28px}
+.about p{margin:0 0 16px;color:#c3c7de;max-width:62ch}
+.facts{display:grid;gap:12px;align-content:start}
+
+.card{position:relative;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:24px;transition:border-color .3s,transform .3s}
+.card::before{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;opacity:0;transition:opacity .3s;background:radial-gradient(320px circle at var(--mx,50%) var(--my,50%),rgba(139,124,255,.16),transparent 70%)}
+.card:hover{border-color:rgba(139,124,255,.55);transform:translateY(-4px)}
+.card:hover::before{opacity:1}
+.card h3{margin:0 0 6px;font-size:1.12rem}
+.card p{margin:0;color:var(--muted)}
+.fact b{display:block;font-family:var(--display);font-weight:500;color:var(--cyan);font-size:1rem;margin-bottom:2px}
+
+.groups{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+.chip{padding:7px 14px;border-radius:999px;border:1px solid var(--line);background:rgba(255,255,255,.02);font-size:.92rem;transition:all .25s}
+.chip:hover{border-color:var(--cyan);color:#fff;box-shadow:0 0 18px rgba(53,224,255,.3);transform:translateY(-2px)}
+
+.job{display:grid;grid-template-columns:200px 1fr;gap:28px}
+.job .when{color:var(--muted);font-family:var(--mono);font-size:.88rem}
+.job h3{margin:0 0 4px;font-size:1.3rem}
+.job .role{color:var(--violet);margin:0 0 14px;font-weight:600}
+.job .desc{color:#c3c7de;margin:0}
+
+.tasks{list-style:none;margin:18px 0 0;padding:0;display:grid;gap:10px}
+.tasks:empty{display:none}
+.tasks li{position:relative;padding-left:26px;color:#c3c7de;max-width:62ch}
+.tasks li::before{content:"";position:absolute;left:4px;top:.7em;width:8px;height:8px;border-radius:50%;background:linear-gradient(120deg,var(--violet),var(--cyan));box-shadow:0 0 10px var(--glow)}
+
+.projects{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
+.proj{display:flex;flex-direction:column;gap:14px;min-height:210px}
+.proj h3{font-family:var(--display);font-weight:500;font-size:1.15rem}
+.proj .go{margin-top:auto;color:var(--cyan);font-weight:600}
+.proj:hover .go{text-decoration:underline;text-underline-offset:5px}
+
+.gh{margin-top:24px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+footer{padding:64px 0 48px;color:var(--muted);text-align:center;font-size:.9rem;position:relative;z-index:1}
+
+.rv{opacity:0;transform:translateY(22px);transition:opacity .7s,transform .7s cubic-bezier(.2,.7,.2,1)}
+.rv.in{opacity:1;transform:none}
+@media (max-width:860px){
+  #hero,.about,.groups,.projects,.job{grid-template-columns:1fr}
+  #hero{min-height:0;padding-top:48px}
+  .job{gap:8px}
+  .logo{display:none}
+}
+@media (prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+  .rv,.hero-in>*,.code{opacity:1!important;transform:none!important}
+}
+</style>
+</head>
+<body>
+<div id="spot"></div>
+
+<header>
+  <div class="wrap">
+    <a class="logo" href="#hero" aria-label="В начало">&lt;anatoly /&gt;</a>
+    <nav aria-label="Разделы">
+      <a href="#about">Обо мне</a>
+      <a href="#skills">Навыки</a>
+      <a href="#experience">Опыт</a>
+      <a href="#projects">Проекты</a>
+      <a href="#github">GitHub</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <section id="hero">
+    <div class="hero-in">
+      <h1>Фронтенд-разработчик. Собираю интерфейсы, которые видно сразу.</h1>
+      <p class="lead">Учусь на 3 курсе колледжа и программирую со средней школы. Пишу на JavaScript, изучаю React и иду в сторону fullstack.</p>
+      <div class="btns">
+        <a class="btn main" href="#projects">Смотреть проекты</a>
+        <a class="btn" href="https://github.com/TOLIKLOL777" target="_blank" rel="noopener">GitHub</a>
+      </div>
+    </div>
+    <div class="code" aria-hidden="true">
+      <div class="bar"><i></i><i></i><i></i></div>
+      <pre><span class="k">const</span> developer = {
+  role: <span class="s">"frontend"</span>,
+  stack: [<span class="s">"HTML"</span>, <span class="s">"CSS"</span>, <span class="s">"JavaScript"</span>, <span class="s">"Node.js"</span>],
+  learning: [<span class="s">"React"</span>, <span class="s">"Svelte"</span>],
+  goal: <span class="s">"fullstack"</span>,
+  learnsBy: <span class="s">"practice"</span><span class="caret"></span>
+};</pre>
+    </div>
+  </section>
+
+  <section id="about">
+    <h2 class="rv">Обо мне</h2>
+    <div class="about rv">
+      <div>
+        <p>Я Анатолий Константинов учусь на фронтенд-разработчика и пришёл в IT после 9 класса, чтобы быстрее попасть в профессию. Программирую со средних классов: ходил на кружки, делал игры и приложения для себя.</p>
+        <p>Фронтенд выбрал за то, что результат кода виден сразу. Мне нравится собирать интерфейсы, а в дизайне я не силён, зато уверенно работаю по макету в Figma.</p>
+        <p>Лучше всего учусь практикой: быстро запоминаю, когда делаю сам. Дальше хочу освоить больше фреймворков, поработать на реальных проектах и фрилансе, а со временем прийти в крупную команду.</p>
+      </div>
+      <div class="facts">
+        <div class="card fact"><b>3 курс</b><p>Фронтенд-разработка</p></div>
+        <div class="card fact"><b>Учусь</b>
+          <p>Углубляю React и осваиваю новые фреймворки</p>
+        </div>
+        <div class="card fact"><b>Цель</b><p>Fullstack: фриланс, затем крупная компания</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="skills">
+    <h2 class="rv">Навыки и инструменты</h2>
+    <div class="groups rv">
+      <div class="card"><h3>Основа</h3><div class="chips">
+        <span class="chip">HTML</span><span class="chip">CSS</span><span class="chip">JavaScript</span><span class="chip">Node.js</span><span class="chip">Git</span><span class="chip">API</span></div></div>
+      <div class="card"><h3>Фреймворки и язык</h3><div class="chips">
+        <span class="chip">React</span><span class="chip">Svelte (базовый)</span><span class="chip">Python</span></div></div>
+      <div class="card"><h3>Верстка и ИИ</h3><div class="chips">
+        <span class="chip">Figma</span><span class="chip">Tilda</span><span class="chip">ИИ: текст и код</span><span class="chip">ИИ: фото</span></div></div>
+    </div>
+  </section>
+
+  <section id="experience">
+    <h2 class="rv">Опыт работы</h2>
+    <div class="card job rv" id="job"></div>
+  </section>
+
+  <section id="projects">
+    <h2 class="rv">Проекты</h2>
+    <div class="projects">
+      <a class="card proj rv" href="https://github.com/TOLIKLOL777/skypro-kanban" target="_blank" rel="noopener">
+        <h3>skypro-kanban</h3>
+        <p>Канбан-доска для управления задачами. Проект курса SkyPro.</p>
+        <div class="chips">
+          <span class="chip">React</span><span class="chip">Hooks</span><span class="chip">API</span><span class="chip">Routing</span><span class="chip">Props</span><span class="chip">Context</span><span class="chip">Theme</span><span class="chip">Styled components</span>
+        </div>
+        <span class="go">Открыть на GitHub</span>
+      </a>
+      <a class="card proj rv" href="https://github.com/SHADrussed/skypro-wallet" target="_blank" rel="noopener">
+        <h3>skypro-wallet</h3>
+        <p>Приложение для учёта личных финансов. Проект курса SkyPro. Был сделан в команде из двух человек.</p>
+        <div class="chips"><span class="chip">React</span><span class="chip">Git</span><span class="chip">API</span><span
+          class="chip">Routing</span><span class="chip">Работа в команде</span><span class="chip">Agile</span></div>
+        <span class="go">Открыть на GitHub</span>
+      </a>
+    </div>
+  </section>
+
+  <section id="github">
+    <h2 class="rv">Остальные работы</h2>
+    <div class="card gh rv">
+      <p>Другие проекты и эксперименты лежат в моём профиле.</p>
+      <a class="btn main" href="https://github.com/TOLIKLOL777" target="_blank" rel="noopener">Профиль на GitHub</a>
+    </div>
+  </section>
+</main>
+
+<footer>© 2026 Анатолий Константинов</footer>
+
+<script>
+const EXPERIENCE = {
+  company: "Keisenpai",
+  role: "Frontend developer",
+  period: "01.09.26 и по сей день",
+  description: `Разработка и поддержка frontend образовательной платформы на Svelte`,
+  list: [
+    "Доработка страниц платформы на Svelte",
+    "Исправление багов на сайте и UI/UX дизайна интерфейсов",
+    "Работа с CI, ускорении сборки Build Kit",
+    "Работа с темами сайта root, исправление отображения",
+    "Добавление нового функционала и элементов в Svelte",
+  ],
+  tools: ["Svelte", "CI", "UI/UX", "JavaScript", "Bug fixing", "Git internal", "Node.js"]
+};
+
+(function () {
+  var e = EXPERIENCE, job = document.getElementById("job");
+  var chips = e.tools.map(function (t) { return '<span class="chip"></span>'; }).join("");
+  job.innerHTML = '<div class="when"></div><div><h3></h3><p class="role"></p><p class="desc"></p><ul class="tasks"></ul><div class="chips">' + chips + '</div></div>';
+  job.querySelector(".when").textContent = e.period;
+  job.querySelector("h3").textContent = e.company;
+  job.querySelector(".role").textContent = e.role;
+  job.querySelector(".desc").textContent = e.description;
+  job.querySelectorAll(".chip").forEach(function (c, i) { c.textContent = e.tools[i]; });
+  var ul = job.querySelector(".tasks");
+  (e.list || []).forEach(function (t) {
+    var li = document.createElement("li");
+    li.textContent = t;
+    ul.appendChild(li);
+  });
+})();
+
+/* Подсветка курсором */
+document.addEventListener("pointermove", function (ev) {
+  var s = document.getElementById("spot");
+  s.style.setProperty("--x", ev.clientX + "px");
+  s.style.setProperty("--y", ev.clientY + "px");
+  var c = ev.target.closest && ev.target.closest(".card");
+  if (c) {
+    var r = c.getBoundingClientRect();
+    c.style.setProperty("--mx", ev.clientX - r.left + "px");
+    c.style.setProperty("--my", ev.clientY - r.top + "px");
+  }
+});
+
+/* Появление блоков и активный пункт меню */
+var io = new IntersectionObserver(function (items) {
+  items.forEach(function (it) { if (it.isIntersecting) { it.target.classList.add("in"); io.unobserve(it.target); } });
+}, { threshold: 0.12 });
+document.querySelectorAll(".rv").forEach(function (el) { io.observe(el); });
+
+var links = document.querySelectorAll("nav a");
+var so = new IntersectionObserver(function (items) {
+  items.forEach(function (it) {
+    if (it.isIntersecting) {
+      links.forEach(function (a) { a.classList.toggle("on", a.getAttribute("href") === "#" + it.target.id); });
+    }
+  });
+}, { rootMargin: "-45% 0px -50% 0px" });
+document.querySelectorAll("section[id]").forEach(function (s) { so.observe(s); });
+</script>
+</body>
+</html>
